@@ -1,144 +1,146 @@
+//i18n => {"account.account.Text.1":"This project is in beta. Use at your own risk.","account.account.Text.2":"Connect your wallet to continue","account.account.Text.3":"Connect"}
+import i18next from "i18next";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 import {
-  Typography,
-  Button,
+	Typography,
+	Button,
 } from '@material-ui/core';
-import { colors } from '../../theme'
+import { colors } from '../../theme';
 
-import UnlockModal from '../unlock/unlockModal.jsx'
+import UnlockModal from '../unlock/unlockModal.jsx';
 
 const styles = theme => ({
-  root: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    background: colors.blue,
-    minWidth: '100vw',
-    padding: '36px 24px'
-  },
-  connectHeading: {
-    maxWidth: '300px',
-    textAlign: 'center',
-    color: colors.white
-  },
-  connectContainer: {
-    padding: '20px'
-  },
-  actionButton: {
-    color: colors.white,
-    borderColor: colors.white
-  },
-  notConnectedRoot: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  connectedRoot: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    width: '100%'
-  },
-  address: {
-    color: colors.white,
-    width: '100%',
-    paddingBottom: '24px',
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  balances: {
-    color: colors.white,
-    width: '100%',
-    padding: '12px'
-  },
-  balanceContainer: {
-    display: 'flex',
-    width: '100%',
-    justifyContent: 'space-between'
-  },
-  accountHeading: {
-    paddingBottom: '6px'
-  },
-  icon: {
-    cursor: 'pointer'
-  },
-  disclaimer: {
-    padding: '12px',
-    border: '1px solid '+colors.white,
-    borderRadius: '0.75rem',
-    marginBottom: '24px',
-    fontWeight: 1,
-    color: colors.white
-  }
+	root: {
+		flex: 1,
+		display: 'flex',
+		flexDirection: 'column',
+		background: colors.blue,
+		minWidth: '100vw',
+		padding: '36px 24px'
+	},
+	connectHeading: {
+		maxWidth: '300px',
+		textAlign: 'center',
+		color: colors.white
+	},
+	connectContainer: {
+		padding: '20px'
+	},
+	actionButton: {
+		color: colors.white,
+		borderColor: colors.white
+	},
+	notConnectedRoot: {
+		flex: 1,
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	connectedRoot: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'flex-start',
+		alignItems: 'flex-start',
+		width: '100%'
+	},
+	address: {
+		color: colors.white,
+		width: '100%',
+		paddingBottom: '24px',
+		display: 'flex',
+		justifyContent: 'space-between'
+	},
+	balances: {
+		color: colors.white,
+		width: '100%',
+		padding: '12px'
+	},
+	balanceContainer: {
+		display: 'flex',
+		width: '100%',
+		justifyContent: 'space-between'
+	},
+	accountHeading: {
+		paddingBottom: '6px'
+	},
+	icon: {
+		cursor: 'pointer'
+	},
+	disclaimer: {
+		padding: '12px',
+		border: '1px solid '+colors.white,
+		borderRadius: '0.75rem',
+		marginBottom: '24px',
+		fontWeight: 1,
+		color: colors.white
+	}
 });
 
 class Account extends Component {
 
-  constructor(props) {
-    super()
+	constructor(props) {
+		super();
 
-    this.state = {
-      loading: false,
-      modalOpen: false,
-    }
-  }
+		this.state = {
+			loading: false,
+			modalOpen: false,
+		};
+	}
 
-  render() {
-    const { classes } = this.props;
-    const {
-      modalOpen,
-    } = this.state
+	render() {
+		const { classes } = this.props;
+		const {
+			modalOpen,
+		} = this.state;
 
-    return (
-      <div className={ classes.root }>
-        { this.renderNotConnected() }
-        { modalOpen && this.renderModal() }
-      </div>
-    )
-  };
+		return (
+			<div className={ classes.root }>
+				{ this.renderNotConnected() }
+				{ modalOpen && this.renderModal() }
+			</div>
+		);
+	};
 
   renderNotConnected = () => {
-    const { classes } = this.props
-    const { loading } = this.state
+  	const { classes } = this.props;
+  	const { loading } = this.state;
 
-    return (
-      <div className={ classes.notConnectedRoot }>
-        <Typography variant={'h5'} className={ classes.disclaimer }>This project is in beta. Use at your own risk.</Typography>
-        <div className={ classes.connectHeading }>
-          <Typography variant='h3'>Connect your wallet to continue</Typography>
-        </div>
-        <div className={ classes.connectContainer }>
-          <Button
-            className={ classes.actionButton }
-            variant="outlined"
-            color="primary"
-            onClick={ this.unlockClicked }
-            disabled={ loading }
-            >
-            <Typography>Connect</Typography>
-          </Button>
-        </div>
-      </div>
-    )
+  	return (
+  		<div className={ classes.notConnectedRoot }>
+  			<Typography variant={'h5'} className={ classes.disclaimer } id="account.account.Text.1" >{i18next.t('account.account.Text.1')}</Typography>
+  			<div className={ classes.connectHeading }>
+  				<Typography variant='h3' id="account.account.Text.2" >{i18next.t('account.account.Text.2')}</Typography>
+  			</div>
+  			<div className={ classes.connectContainer }>
+  				<Button
+  					className={ classes.actionButton }
+  					variant="outlined"
+  					color="primary"
+  					onClick={ this.unlockClicked }
+  					disabled={ loading }
+  				>
+  					<Typography id="account.account.Text.3" >{i18next.t('account.account.Text.3')}</Typography>
+  				</Button>
+  			</div>
+  		</div>
+  	);
   }
 
   renderModal = () => {
-    return (
-      <UnlockModal closeModal={ this.closeModal } modalOpen={ this.state.modalOpen } />
-    )
+  	return (
+  		<UnlockModal closeModal={ this.closeModal } modalOpen={ this.state.modalOpen } />
+  	);
   }
 
   unlockClicked = () => {
-    this.setState({ modalOpen: true, loading: true })
+  	this.setState({ modalOpen: true, loading: true });
   }
 
   closeModal = () => {
-    this.setState({ modalOpen: false, loading: false })
+  	this.setState({ modalOpen: false, loading: false });
   }
 }
 
