@@ -236,6 +236,11 @@ class Header extends Component {
   		<UnlockModal closeModal={ this.closeModal } modalOpen={ this.state.modalOpen } />
   	);
   }
+
+  changI18nLanguage = (i18nKey) => {
+	i18next.changeLanguage(i18nKey);
+	this.setState({});
+  }
 }
 
 export default withRouter(withStyles(styles)(Header));
